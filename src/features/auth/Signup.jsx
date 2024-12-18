@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import InputField from "../components/InputField"; // Assuming you have this component already
-import { signupAdmin } from "../api/auth";
+import InputField from "../../components/InputField"; // Assuming you have this component already
+import { signupAdmin } from "../../api/auth";
 const Signup = () => {
   const [values, setValues] = useState({
     email: "",
@@ -26,7 +26,7 @@ const Signup = () => {
     // Call the signup API
     signupAdmin(values)
       .then((data) => {
-        if (data.signupStatus) {
+        if (data) {
           localStorage.setItem("valid", true);
           navigate("/dashboard");
         } else {

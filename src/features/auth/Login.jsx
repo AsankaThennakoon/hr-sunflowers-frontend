@@ -1,6 +1,6 @@
-import { loginAdmin } from "../api/auth";
+import { loginAdmin } from "../../api/auth";
 
-import InputField from "../components/InputField";
+import InputField from "../../components/InputField";
 import React, { useState } from "react";
 
 import axios from "axios";
@@ -18,7 +18,9 @@ const Login = () => {
     event.preventDefault();
     loginAdmin(values)
       .then((data) => {
-        if (data.loginStatus) {
+        if (data) {
+
+          
           localStorage.setItem("valid", true);
           navigate("/dashboard");
         } else {

@@ -5,7 +5,7 @@ const loginAdmin = async (credentials) => {
     const response = await axios.post('http://localhost:8081/auth/login', credentials, {
       withCredentials: true,
     });
-    console.log("Response: ", response.data);
+    console.log("Response: hellow helooe ", response.data);
     return response.data;
   } catch (error) {
     throw error;
