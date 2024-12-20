@@ -23,15 +23,25 @@ const ManageEmployees = () => {
       .catch((err) => console.log(err));
   }, []);
   const handleDelete = (id) => {
-    // axios.delete('http://localhost:8081/auth/delete_employee/'+id)
-    // .then(result => {
-    //     if(result.data.Status) {
-    //         window.location.reload()
-    //     } else {
-    //         alert(result.data.Error)
-    //     }
-    // })
-  } 
+    axios
+      .delete(`http://localhost:8081/employee/deleteEmployee`, {
+        params: { id }, // Add query parameter here
+      })
+      .then((result) => {
+        if (result.status === 200) {
+          // Update the state to remove the deleted employee
+          setEmployee((prevEmployees) => prevEmployees.filter((emp) => emp.id !== id));
+          alert("Employee deleted successfully!");
+        } else {
+          alert("Failed to delete the employee.");
+        }
+      })
+      .catch((err) => {
+        console.error(err); // Log any errors for debugging
+        alert("Failed to delete the employee. Please try again.");
+      });
+  };
+  
   return (
     <div className="px-5 mt-3">
       <div className="d-flex justify-content-center">
