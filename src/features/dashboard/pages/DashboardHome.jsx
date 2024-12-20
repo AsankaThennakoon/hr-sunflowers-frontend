@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from '../../../api/axiosConfig'
 import React, { useEffect, useState } from 'react'
 
 const Home = () => {
@@ -25,20 +25,22 @@ const Home = () => {
     // })
   }
   const adminCount = () => {
-    // axios.get('http://localhost:8081/auth/admin_count')
-    // .then(result => {
-    //   if(result.data.Status) {
-    //     setAdminTotal(result.data.Result[0].admin)
-    //   }
-    // })
+    axios.get('http://localhost:8081/admin/count')
+    .then(result => {
+      if(result.status===200) {
+        console.log(result);
+         setAdminTotal(result.data)
+      }
+    })
   }
   const employeeCount = () => {
-    // axios.get('http://localhost:8081/auth/employee_count')
-    // .then(result => {
-    //   if(result.data.Status) {
-    //     setemployeeTotal(result.data.Result[0].employee)
-    //   }
-    // })
+    axios.get('http://localhost:8081/employee/employee_count')
+    .then(result => {
+      if(result.status===200) {
+        console.log(result);
+        setemployeeTotal(result.data)
+      }
+    })
   }
   const salaryCount = () => {
     // axios.get('http://localhost:8081/auth/salary_count')
