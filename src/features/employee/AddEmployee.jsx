@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from '../../api/axiosConfig';
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -29,26 +29,42 @@ const AddEmployee = () => {
   }, []);
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
+  
     const formData = new FormData();
-    formData.append('name', employee.name);
-    formData.append('email', employee.email);
-    formData.append('password', employee.password);
-    formData.append('address', employee.address);
-    formData.append('salary', employee.salary);
-    formData.append('image', employee.image);
-    formData.append('category_id', employee.category_id);
-
-    // axios.post('http://localhost:3000/auth/add_employee', formData)
-    // .then(result => {
-    //     if(result.data.Status) {
-    //         navigate('/dashboard/employee')
-    //     } else {
-    //         alert(result.data.Error)
-    //     }
-    // })
-    // .catch(err => console.log(err))
-  }
+    // Append the employee object as a JSON string
+    const employeeData = JSON.stringify({
+      name: employee.name,
+      email: employee.email,
+      password: employee.password,
+      address: employee.address,
+      salary: employee.salary,
+      position: employee.position,
+      categoryId: 1, // Assuming this is fixed for now
+    });
+  
+    formData.append("employee", employeeData);
+    formData.append("image", employee.image); // Append the file directly
+  
+    axios
+      .post("http://localhost:8081/employee/addEmployee", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data", // Required for sending form-data
+        },
+      })
+      .then((result) => {
+        if (result.status === 201) {
+          navigate("/dashboard/employee"); // Navigate to the employee dashboard on success
+        } else {
+          alert("Error: Unable to add employee.");
+        }
+      })
+      .catch((err) => {
+        console.error("Error while adding employee:", err);
+        alert("Failed to add employee. Please try again.");
+      });
+  };
+  
 
   return (
     <div className="d-flex justify-content-center align-items-center mt-3">

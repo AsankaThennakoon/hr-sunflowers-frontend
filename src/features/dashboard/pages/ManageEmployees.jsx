@@ -1,11 +1,10 @@
-
 import DashboardLayout from "../layouts/DashboardLayout";
-import axios from '../../../api/axiosConfig'
+import axios from "../../../api/axiosConfig";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 const ManageEmployees = () => {
   const [employee, setEmployee] = useState([]);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -15,9 +14,7 @@ const ManageEmployees = () => {
         if (result.data) {
           setEmployee(result.data);
         } else {
-         
           alert(result.data.Error);
-
         }
       })
       .catch((err) => console.log(err));
@@ -30,7 +27,9 @@ const ManageEmployees = () => {
       .then((result) => {
         if (result.status === 200) {
           // Update the state to remove the deleted employee
-          setEmployee((prevEmployees) => prevEmployees.filter((emp) => emp.id !== id));
+          setEmployee((prevEmployees) =>
+            prevEmployees.filter((emp) => emp.id !== id)
+          );
           alert("Employee deleted successfully!");
         } else {
           alert("Failed to delete the employee.");
@@ -41,7 +40,7 @@ const ManageEmployees = () => {
         alert("Failed to delete the employee. Please try again.");
       });
   };
-  
+
   return (
     <div className="px-5 mt-3">
       <div className="d-flex justify-content-center">
@@ -68,8 +67,14 @@ const ManageEmployees = () => {
                 <td>{e.name}</td>
                 <td>
                   <img
-                    src={`http://localhost:8081/Images/` + e.image}
-                    className="employee_image"
+                    src={`http://localhost:8081/images/` + e.image}
+                    className="rounded-circle"
+                    style={{
+                      width: "40px",
+                      height: "40px",
+                      objectFit: "cover",
+                    }}
+                    alt="Employee"
                   />
                 </td>
                 <td>{e.email}</td>
