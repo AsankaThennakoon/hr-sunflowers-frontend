@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from '../../api/axiosConfig'
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 
@@ -24,29 +24,57 @@ const EditEmployee = () => {
         //     }
         // }).catch(err => console.log(err))
 
-        // axios.get('http://localhost:8081/auth/employee/'+id)
-        // .then(result => {
-        //     setEmployee({
-        //         ...employee,
-        //         name: result.data.Result[0].name,
-        //         email: result.data.Result[0].email,
-        //         address: result.data.Result[0].address,
-        //         salary: result.data.Result[0].salary,
-        //         category_id: result.data.Result[0].category_id,
-        //     })
-        // }).catch(err => console.log(err))
+        axios.get('http://localhost:8081/employee/getEmployee/'+id)
+        .then(result => {
+
+          console.log(result);
+            setEmployee({
+                ...employee,
+                name: result.data.name,
+                email: result.data.email,
+                address: result.data.address,
+                salary: result.data.salary,
+                category_id: result.data.category_id,
+            })
+        }).catch(err => console.log(err))
+
+       
     }, [])
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        // axios.put('http://localhost:8081/auth/edit_employee/'+id, employee)
-        // .then(result => {
-        //     if(result.data.Status) {
-        //         navigate('/dashboard/employee')
-        //     } else {
-        //         alert(result.data.Error)
-        //     }
-        // }).catch(err => console.log(err))
+        const formData = new FormData();
+        // Append the employee object as a JSON string
+        const employeeData = JSON.stringify({
+          name: employee.name,
+          email: employee.email,
+          password: employee.password,
+          address: employee.address,
+          salary: employee.salary,
+          position: employee.position,
+          categoryId: 1, // Assuming this is fixed for now
+        });
+      
+        formData.append("employee", employeeData);
+        formData.append("image", employee.image); // Append the file directly
+      
+        axios
+          .put(`http://localhost:8081/employee/updateEmployee?id=${id}`, formData, {
+            headers: {
+              "Content-Type": "multipart/form-data", // Required for sending form-data
+            },
+          })
+          .then((result) => {
+            if (result.status === 200) {
+              navigate("/dashboard/employee"); // Navigate to the employee dashboard on success
+            } else {
+              alert("Error: Unable to update employee.");
+            }
+          })
+          .catch((err) => {
+            console.error("Error while updating employee:", err);
+            alert("Failed to update employee. Please try again.");
+          });
     }
     
   return (
