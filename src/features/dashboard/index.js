@@ -4,5 +4,5 @@ export { default as DashboardLayout } from "./layouts/DashboardLayout";
 export { default as Dashboard } from "./pages/Dashboard";
 export { default as ManageEmployees } from "./pages/ManageEmployees";
 export { default as Profile } from "./pages/Profile";
-export { default as Category } from "./pages/Category";
+export { default as Department } from "./pages/Department";
 export { default as DashboardHome } from "./pages/DashboardHome";

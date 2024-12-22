@@ -15,14 +15,15 @@ const Home = () => {
   }, [])
 
   const AdminRecords = () => {
-    // axios.get('http://localhost:8081/auth/admin_records')
-    // .then(result => {
-    //   if(result.data.Status) {
-    //     setAdmins(result.data.Result)
-    //   } else {
-    //      alert(result.data.Error)
-    //   }
-    // })
+    axios.get('http://localhost:8081/admin/admin_list')
+    .then(result => {
+      if(result.status===200) {
+        console.log(result);
+        setAdmins(result.data)
+      } else {
+         alert(result.data.Error)
+      }
+    })
   }
   const adminCount = () => {
     axios.get('http://localhost:8081/admin/count')
@@ -91,6 +92,7 @@ const Home = () => {
         <table className='table'>
           <thead>
             <tr>
+              <th>UserName</th>
               <th>Email</th>
               <th>Action</th>
             </tr>
@@ -99,6 +101,7 @@ const Home = () => {
             {
               admins.map(a => (
                 <tr>
+                  <td>{a.userName}</td>
                   <td>{a.email}</td>
                   <td>
                   <button

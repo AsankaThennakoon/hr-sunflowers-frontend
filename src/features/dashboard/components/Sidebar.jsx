@@ -38,11 +38,11 @@ const Sidebar = ({ handleLogout }) => {
           </li>
           <li className="w-100">
             <Link
-              to="/dashboard/category"
+              to="/dashboard/Department"
               className="nav-link px-0 align-middle text-white"
             >
               <i className="fs-4 bi-columns ms-2"></i>
-              <span className="ms-2 d-none d-sm-inline">Category</span>
+              <span className="ms-2 d-none d-sm-inline">Departments</span>
             </Link>
           </li>
           <li className="w-100">
