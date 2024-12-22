@@ -44,14 +44,14 @@ const Home = () => {
     })
   }
   const salaryCount = () => {
-    // axios.get('http://localhost:8081/auth/salary_count')
-    // .then(result => {
-    //   if(result.data.Status) {
-    //     setSalaryTotal(result.data.Result[0].salaryOFEmp)
-    //   } else {
-    //     alert(result.data.Error)
-    //   }
-    // })
+    axios.get('http://localhost:8081/department/department_count')
+    .then(result => {
+      if(result.status==200) {
+        setSalaryTotal(result.data)
+      } else {
+        alert(result.data.Error)
+      }
+    })
   }
   return (
     <div>
@@ -78,12 +78,12 @@ const Home = () => {
         </div>
         <div className='px-3 pt-2 pb-3 border shadow-sm w-25'>
           <div className='text-center pb-1'>
-            <h4>Salary</h4>
+            <h4>Department</h4>
           </div>
           <hr />
           <div className='d-flex justify-content-between'>
             <h5>Total:</h5>
-            <h5>${salaryTotal}</h5>
+            <h5>{salaryTotal}</h5>
           </div>
         </div>
       </div>

@@ -10,6 +10,7 @@ import {
 import AddDepartment from "./features/departments/AddDepartment";
 import AddEmployee from "./features/employee/AddEmployee";
 import EditEmployee from "./features/employee/EditEmployee";
+import EditDepartment from "./features/departments/EditeDepartment";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
@@ -24,6 +25,8 @@ function App() {
           <Route path='' element={<DashboardHome />}></Route>
           <Route path="employee" element={<ManageEmployees />} />
           <Route path="Department" element={<Department />} />
+          <Route path="edit_department/:id" element={<EditDepartment />} />
+
           <Route path="profile" element={<Profile />} />
           <Route path="add_Department" element={<AddDepartment />} />
           <Route path="add_employee" element={<AddEmployee />} />
