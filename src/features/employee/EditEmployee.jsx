@@ -1,4 +1,4 @@
-import axios from '../../api/axiosConfig'
+import apiClient from '../../api/axiosConfig'
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 
@@ -15,7 +15,7 @@ const EditEmployee = () => {
       const navigate = useNavigate()
 
       useEffect(()=> {
-        // axios.get('http://localhost:8081/auth/category')
+        // apiClient.get('/auth/category')
         // .then(result => {
         //     if(result.data.Status) {
         //         setCategory(result.data.Result);
@@ -24,7 +24,7 @@ const EditEmployee = () => {
         //     }
         // }).catch(err => console.log(err))
 
-        axios.get('http://localhost:8081/employee/getEmployee/'+id)
+        apiClient.get('/employee/getEmployee/'+id)
         .then(result => {
 
           console.log(result);
@@ -58,8 +58,8 @@ const EditEmployee = () => {
         formData.append("employee", employeeData);
         formData.append("image", employee.image); // Append the file directly
       
-        axios
-          .put(`http://localhost:8081/employee/updateEmployee?id=${id}`, formData, {
+        apiClient
+          .put(`/employee/updateEmployee?id=${id}`, formData, {
             headers: {
               "Content-Type": "multipart/form-data", // Required for sending form-data
             },

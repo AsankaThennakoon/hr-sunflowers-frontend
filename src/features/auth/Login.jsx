@@ -2,8 +2,6 @@ import { loginAdmin } from "../../api/auth";
 
 import InputField from "../../components/InputField";
 import React, { useState } from "react";
-
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 const Login = () => {
   const [values, setValues] = useState({
@@ -12,7 +10,6 @@ const Login = () => {
   });
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  axios.defaults.withCredentials = true;
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -21,7 +18,6 @@ const Login = () => {
         if (data) {
 
           
-          localStorage.setItem("valid", true);
           navigate("/dashboard");
         } else {
           setError(data.Error);

@@ -2,20 +2,23 @@ import React from "react";
 import Sidebar from "../components/Sidebar";
 import Header from "../components/Header";
 import { Outlet, useNavigate } from "react-router-dom";
-import axios from "axios";
-
+import apiClient from "../../../api/axiosConfig";
 const DashboardLayout = () => {
   const navigate = useNavigate();
-  axios.defaults.withCredentials = true;
+  apiClient.defaults.withCredentials = true;
 
-  const handleLogout = () => {
-    // axios.get("http://localhost:8081/auth/logout").then((result) => {
-    //   if (result.data.Status) {
-    //     localStorage.removeItem("valid");
-    //     navigate("/");
-    //   }
-    // });
-  };
+  const handleLogout= async () => {
+    try {
+        const token = localStorage.getItem('authToken');
+        await apiClient.post('/auth/logout', {}, {
+            headers: { Authorization: `Bearer ${token}` }
+        });
+        localStorage.removeItem('authToken'); // Clear token
+        navigate('/'); // Redirect
+    } catch (error) {
+        console.error("Logout failed:", error);
+    }
+};
 
   return (
     <div className="container-fluid">

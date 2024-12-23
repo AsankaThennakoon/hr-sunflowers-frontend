@@ -1,4 +1,4 @@
-import axios from '../../api/axiosConfig';
+import apiClient from "../../api/axiosConfig";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -16,8 +16,8 @@ const AddEmployee = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    // axios
-    //   .get("http://localhost:8081/auth/category")
+    // apiClient
+    //   .get("/auth/category")
     //   .then((result) => {
     //     if (result.data.Status) {
     //       setCategory(result.data.Result);
@@ -46,8 +46,8 @@ const AddEmployee = () => {
     formData.append("employee", employeeData);
     formData.append("image", employee.image); // Append the file directly
   
-    axios
-      .post("http://localhost:8081/employee/addEmployee", formData, {
+    apiClient
+      .post("/employee/addEmployee", formData, {
         headers: {
           "Content-Type": "multipart/form-data", // Required for sending form-data
         },

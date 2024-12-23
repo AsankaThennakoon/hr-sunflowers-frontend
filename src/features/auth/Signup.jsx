@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import InputField from "../../components/InputField"; // Assuming you have this component already
 import { signupAdmin } from "../../api/auth";
 const Signup = () => {
@@ -12,7 +11,6 @@ const Signup = () => {
   });
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  axios.defaults.withCredentials = true;
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -27,8 +25,7 @@ const Signup = () => {
     signupAdmin(values)
       .then((data) => {
         if (data) {
-          localStorage.setItem("valid", true);
-          navigate("/dashboard");
+          navigate("/");
         } else {
           setError(data.Error);
         }

@@ -1,4 +1,4 @@
-import axios from '../../api/axiosConfig';
+import apiClient from '../../api/axiosConfig';
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -16,7 +16,7 @@ const EditDepartment = () => {
     // Fetch department details when the component loads
     const fetchDepartment = async () => {
       try {
-        const response = await axios.get(`http://localhost:8081/department/getDepartment/${id}`);
+        const response = await apiClient.get(`/department/getDepartment/${id}`);
         setDepartment(response.data);
       } catch (err) {
         console.error(err);
@@ -35,7 +35,7 @@ const EditDepartment = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.put(`http://localhost:8081/department/updateDepartment?id=${id}`, department);
+      const response = await apiClient.put(`/department/updateDepartment?id=${id}`, department);
       if (response.status === 200) {
         navigate('/dashboard/Department');
       } else {

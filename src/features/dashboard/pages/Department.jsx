@@ -1,4 +1,4 @@
-import axios from "axios";
+import apiClient from "../../../api/axiosConfig";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -6,8 +6,8 @@ const Department = () => {
   const [Department, setDepartment] = useState([]);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:8081/department/department")
+    apiClient
+      .get("/department/department")
       .then((result) => {
         if (result.status == 200) {
           setDepartment(result.data);
@@ -20,24 +20,24 @@ const Department = () => {
 
 
   const handleDelete = (id) => {
-    axios
-      .delete(`http://localhost:8081/department/deleteDepartment`, {
+    apiClient
+      .delete(`/department/deleteDepartment`, {
         params: { id }, // Add query parameter here
       })
       .then((result) => {
         if (result.status === 200) {
           // Update the state to remove the deleted employee
-          setDepartment((preDepartment) =>
+          setDepartment((preDepartment) => 
             preDepartment.filter((dep) => dep.department_id !== id)
           );
-          alert("Employee deleted successfully!");
+          alert("Department deleted successfully!");
         } else {
           alert("Failed to delete the department.");
         }
       })
       .catch((err) => {
         console.error(err); // Log any errors for debugging
-        alert("Failed to delete the employee. Please try again.");
+        alert("Failed to delete the Department. Please try again.");
       });}
   return (
     <div className="px-5 mt-3">
@@ -58,8 +58,8 @@ const Department = () => {
             </tr>
           </thead>
           <tbody>
-            {Department.map((c) => (
-              <tr>
+            {Department.map((c,index) => (
+              <tr key={index}>
                 <td>{c.name}</td>
                 <td>{c.location}</td>
                 <td>{c.numberOfEmployee}</td>

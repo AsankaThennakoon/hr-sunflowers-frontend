@@ -1,8 +1,8 @@
-import axios from 'axios';
+import apiClient from "./axiosConfig";
 
 const loginAdmin = async (credentials) => {
   try {
-    const response = await axios.post('http://localhost:8081/auth/login', credentials, {
+    const response = await apiClient.post('/auth/login', credentials, {
       withCredentials: true,
     });
     console.log("Response: ", response.data);
@@ -17,7 +17,7 @@ const loginAdmin = async (credentials) => {
 // API call for signup
 const signupAdmin = async (credentials) => {
     try {
-      const response = await axios.post('http://localhost:8081/auth/signup', credentials, {
+      const response = await apiClient.post('/auth/signup', credentials, {
         withCredentials: true,
       });
       return response.data;

@@ -1,4 +1,4 @@
-import axios from '../../../api/axiosConfig'
+import apiClient from '../../../api/axiosConfig'
 import React, { useEffect, useState } from 'react'
 
 const Home = () => {
@@ -15,7 +15,7 @@ const Home = () => {
   }, [])
 
   const AdminRecords = () => {
-    axios.get('http://localhost:8081/admin/admin_list')
+    apiClient.get('/admin/admin_list')
     .then(result => {
       if(result.status===200) {
         console.log(result);
@@ -26,7 +26,7 @@ const Home = () => {
     })
   }
   const adminCount = () => {
-    axios.get('http://localhost:8081/admin/count')
+    apiClient.get('/admin/count')
     .then(result => {
       if(result.status===200) {
         console.log(result);
@@ -35,7 +35,7 @@ const Home = () => {
     })
   }
   const employeeCount = () => {
-    axios.get('http://localhost:8081/employee/employee_count')
+    apiClient.get('/employee/employee_count')
     .then(result => {
       if(result.status===200) {
         console.log(result);
@@ -44,7 +44,7 @@ const Home = () => {
     })
   }
   const salaryCount = () => {
-    axios.get('http://localhost:8081/department/department_count')
+    apiClient.get('/department/department_count')
     .then(result => {
       if(result.status==200) {
         setSalaryTotal(result.data)
@@ -99,8 +99,8 @@ const Home = () => {
           </thead>
           <tbody>
             {
-              admins.map(a => (
-                <tr>
+              admins.map((a,index) => (
+                <tr key={index}>
                   <td>{a.userName}</td>
                   <td>{a.email}</td>
                   <td>

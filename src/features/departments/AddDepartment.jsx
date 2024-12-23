@@ -1,4 +1,4 @@
-import axios from '../../api/axiosConfig';
+import apiClient from '../../api/axiosConfig';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -19,7 +19,7 @@ const AddDepartment = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8081/department/addDepartment', department);
+      const response = await apiClient.post('/department/addDepartment', department);
       if (response.status === 201) {
         navigate('/dashboard/Department');
       } else {
