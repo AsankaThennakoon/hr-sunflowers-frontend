@@ -67,7 +67,7 @@ const ManageEmployees = () => {
                 <td>{e.name}</td>
                 <td>
                   <img
-                    src={`/images/` + e.image}
+                    src={`http://localhost:8081/images/` + e.image}
                     className="rounded-circle"
                     style={{
                       width: "40px",

@@ -20,7 +20,10 @@ const signupAdmin = async (credentials) => {
       const response = await apiClient.post('/auth/signup', credentials, {
         withCredentials: true,
       });
-      return response.data;
+      console.log("Response: ", response.data);
+    // Store the token in local storage
+    localStorage.setItem("authToken", response.data.token);
+    return response.data;
     } catch (error) {
       throw error;
     }

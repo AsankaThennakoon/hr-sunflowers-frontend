@@ -26,10 +26,10 @@ apiClient.interceptors.response.use(
   (response) => response,
   (error) => {
     // Check if the error is due to an expired token
-    if (error.response?.status === 401) {
+    if (error.response?.status === 403) {
       // Clear token and redirect to login
       localStorage.removeItem('authToken');
-      window.location.href = '/login';
+      window.location.href = '/';
     }
     return Promise.reject(error);
   }

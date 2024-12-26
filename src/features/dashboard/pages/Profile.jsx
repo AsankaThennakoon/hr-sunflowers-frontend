@@ -22,7 +22,7 @@ const Profile = () => {
   const handleInputChange = (e) => {
     setProfile({ ...profile, [e.target.name]: e.target.value });
   };
-  
+
   const handleImageUpload = (e, type) => {
     const file = e.target.files[0];
     if (file) {
@@ -50,7 +50,9 @@ const Profile = () => {
           style={{
             height: "200px",
             backgroundColor: "#f0f0f0",
-            backgroundImage: `url(${profile.coverPhoto || "https://via.placeholder.com/1200x400"})`,
+            backgroundImage: `url(${
+              profile.coverPhoto || "https://via.placeholder.com/1200x400"
+            })`,
             backgroundSize: "cover",
             backgroundPosition: "center",
             borderRadius: "10px",
@@ -110,29 +112,53 @@ const Profile = () => {
         </div>
       </div>
 
-      <div className="mt-5 text-center">
+      <div className="mt-5 text-center"  >
         {error && <div className="alert alert-danger">{error}</div>}
         {success && <div className="alert alert-success">{success}</div>}
 
         {!isEditing ? (
-          <div>
-            <h3>{profile.businessName}</h3>
-            <p><strong>Email:</strong> {profile.email}</p>
-            <p><strong>Phone:</strong> {profile.phone}</p>
-            <p><strong>Address:</strong> {profile.address}</p>
-            <button
-              className="btn btn-primary"
-              onClick={() => setIsEditing(true)}
-            >
-              Edit Profile
-            </button>
+          <div
+          style={{
+            marginTop: "100px",
+            
+          }}
+        ><div className="card shadow-lg p-4 mb-5 bg-white rounded ">
+        <div className="card-body text-center">
+          <div className="profile-header">
+           
+            <h3 className="card-title">{profile.businessName}</h3>
+            <p className="text-muted mb-3">{profile.email}</p>
           </div>
+          <hr />
+          <div className="profile-details text-start">
+            <p>
+              <strong>Phone:</strong> {profile.phone}
+            </p>
+            <p>
+              <strong>Address:</strong> {profile.address}
+            </p>
+          </div>
+          <button
+            className="btn btn-primary btn-sm mt-3"
+            onClick={() => setIsEditing(true)}
+          >
+            Edit Profile
+          </button>
+        </div>
+      </div></div>
+          
+        
         ) : (
           <form onSubmit={handleSubmit} className="mt-5">
-          
-            <div className="mb-5">
-              <label className="form-label">Business Name</label>
+            <div
+              style={{
+                marginBottom: "150px",
+                
+              }}
+            ></div>
+            <div className="form-floating mb-3">
               <input
+                id="businessName4"
                 type="text"
                 className="form-control"
                 name="businessName"
@@ -140,38 +166,44 @@ const Profile = () => {
                 onChange={handleInputChange}
                 required
               />
+              <label for='businessName4'>Business Name</label>
             </div>
-            <div className="mb-3">
-              <label className="form-label">Email</label>
+            <div className="form-floating mb-3">
+              
               <input
+              id="email4"
                 type="email"
                 className="form-control"
                 name="email"
                 value={profile.email}
                 onChange={handleInputChange}
                 required
-              />
+              /><label for='email4'>Email</label>
             </div>
-            <div className="mb-3">
-              <label className="form-label">Phone</label>
+            <div className="form-floating mb-3">
+            
               <input
+              id="phone4"
                 type="text"
                 className="form-control"
                 name="phone"
                 value={profile.phone}
                 onChange={handleInputChange}
                 required
-              />
+              />  
+              <label for='phone4'>Phone</label>
             </div>
-            <div className="mb-3">
-              <label className="form-label">Address</label>
+            <div className="form-floating mb-3">
+              
               <textarea
+              id="address4"
                 className="form-control"
                 name="address"
                 value={profile.address}
                 onChange={handleInputChange}
                 required
               />
+              <label for='address4'>Address</label>
             </div>
             <button type="submit" className="btn btn-success">
               Save Changes

@@ -25,7 +25,7 @@ const Signup = () => {
     signupAdmin(values)
       .then((data) => {
         if (data) {
-          navigate("/");
+          navigate("/dashboard");
         } else {
           setError(data.Error);
         }
