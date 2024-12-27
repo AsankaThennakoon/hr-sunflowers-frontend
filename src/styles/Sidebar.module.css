@@ -1,0 +1,16 @@
+.nav-link:hover {
+    background-color: #ffffff20;
+    border-radius: 5px;
+    color: #ffd700 !important;
+  }
+  
+  .nav-link.active {
+    background-color: #ffd700;
+    color: #16213e !important;
+    font-weight: bold;
+  }
+  
+  button:hover {
+    background-color: #ff3333 !important;
+  }
+  
