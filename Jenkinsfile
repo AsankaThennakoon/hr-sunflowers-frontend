@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = "asankathennakoon/hr-sunflowers-frontend"
+        DOCKER_IMAGE = "tmat1560/hr-sunflowers-frontend"
         DOCKER_CREDENTIALS_ID = "asanka-dockerhub" // Replace with your Jenkins Docker Hub credentials ID
     }
 
