@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = "asankathennakoon/hr-sunflowers-frontend"
-        DOCKER_CREDENTIALS_ID = "asanka-dockerhub" // Replace with your Jenkins Docker Hub credentials ID
+        DOCKER_CREDENTIALS_ID = "tmat1560" // Replace with your Jenkins Docker Hub credentials ID
     }
 
     stages {
