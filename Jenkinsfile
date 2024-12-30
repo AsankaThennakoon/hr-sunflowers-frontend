@@ -42,9 +42,10 @@ pipeline {
                 script {
                     // Use 'sh' instead of 'bat' if running on a Linux-based Jenkins agent
                     bat """
-                    docker stop hr-sunflowers-frontend || exit 0
-                    docker rm hr-sunflowers-frontend || exit 0
+                    docker stop hr-sunflowers-frontend || true
+                    docker rm hr-sunflowers-frontend || true
                     docker run -d --name hr-sunflowers-frontend -p 1574:80 ${DOCKER_IMAGE}:latest
+                    docker ps
                     """
                 }
             }
