@@ -37,14 +37,14 @@ pipeline {
                 }
             }
         }
-        stage('Deploy Without Docker Compose') {
+        stage('Deploy Docke image') {
             steps {
                 script {
                     // Use 'sh' instead of 'bat' if running on a Linux-based Jenkins agent
                     bat """
                     docker stop hr-sunflowers-frontend || true
                     docker rm hr-sunflowers-frontend || true
-                    docker run -d --name hr-sunflowers-frontend -p 5173:80 ${DOCKER_IMAGE}:latest
+                    docker run -d --name hr-sunflowers-frontend -p 5174:80 ${DOCKER_IMAGE}:latest
                     docker ps
                     """
                 }
@@ -55,7 +55,7 @@ pipeline {
                 script {
                     bat """
                     timeout /t 10
-                    curl -f http://localhost:5173 || exit /b 1
+                    curl -f http://localhost:5174 || exit /b 1
                     """
                 }
             }
