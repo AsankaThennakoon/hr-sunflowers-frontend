@@ -16,7 +16,7 @@ const Header = ({ profile }) => {
 
       {/* Tagline or additional information */}
       <div className="text-center">
-        <h6 className="mb-0 text-muted">Efficient HR Management </h6>
+        <h6 className="mb-0 text-muted">Efficient HR Management Sunflowers</h6>
       </div>
 
       {/* User Actions */}
