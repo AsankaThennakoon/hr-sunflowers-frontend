@@ -37,12 +37,15 @@ pipeline {
                 }
             }
         }
-        stage('Deploy with Docker Compose') {
+        stage('Deploy Without Docker Compose') {
             steps {
                 script {
-                    // Replace with `sh` if running on a Linux-based Jenkins agent
-                    bat 'docker-compose down'
-                    bat 'docker-compose up -d'
+                    // Use 'sh' instead of 'bat' if running on a Linux-based Jenkins agent
+                    bat """
+                    docker stop hr-sunflowers-frontend || exit 0
+                    docker rm hr-sunflowers-frontend || exit 0
+                    docker run -d --name hr-sunflowers-frontend -p 1574:80 ${DOCKER_IMAGE}:latest
+                    """
                 }
             }
         }
